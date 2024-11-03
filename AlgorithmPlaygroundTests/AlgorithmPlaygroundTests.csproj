@@ -61,6 +61,7 @@
     <Compile Include="Dynamic\FibonacciTests.cs" />
     <Compile Include="Dynamic\GridTravelerTests.cs" />
     <Compile Include="Facebook\UnitTest1.cs" />
+    <Compile Include="HackerRankChallenges\TowerBreakersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\BinarySearchTests.cs" />
     <Compile Include="Search\CompareTwoArraysTests.cs" />
