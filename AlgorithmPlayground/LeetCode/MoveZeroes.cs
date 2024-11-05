@@ -11,27 +11,26 @@ namespace AlgorithmPlayground.LeetCode
         public static void MoveZeroesToTheEnd(int[] nums)
         {
             if (nums == null || nums.Length <= 1) return;
+            Queue<int> zeroes = new Queue<int>();
 
-            for (int i = 0; i < nums.Length - 1; i++)
+            for (int i = 0; i < nums.Length;)
             {
                 if (nums[i] == 0)
                 {
-                    // we are at zero, need to swap
-                    //  find the first not-zero index
-                    var candidate = i + 1;
-                    while (candidate < nums.Length)
-                    {
-                        if (nums[candidate] != 0)
-                        {
-                            //var tmp = nums[i];
-                            nums[i] = nums[candidate];
-                            nums[candidate] = 0;
-                            break;      // found a swap, we can exit the inner loop
-                        }
-
-                        candidate++;
-                    }
+                    zeroes.Enqueue(i);
+                    i++;
+                    continue;
                 }
+
+                if (nums[i] != 0 && zeroes.TryPeek(out int zeroIndex))
+                {
+                    zeroIndex = zeroes.Dequeue();
+                    nums[zeroIndex] = nums[i];
+                    nums[i] = 0;
+                    continue;
+                }
+
+                i++;
             }
         }
     }

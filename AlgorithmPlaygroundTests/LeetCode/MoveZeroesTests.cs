@@ -43,10 +43,32 @@ namespace AlgorithmPlayground.LeetCode.Tests
         }
 
         [TestMethod()]
+        public void ConsecutiveZeros_Should_BeMovedToTheEnd()
+        {
+            var input1actual = new int[] { 0, 0, 1 };
+            var expect = new int[] { 1, 0, 0 };
+
+            MoveZeroes.MoveZeroesToTheEnd(input1actual);
+
+            input1actual.Should().Equal(expect);
+        }
+
+        [TestMethod()]
         public void ManyNonconsecutiveZeros_Should_MoveZeroBack()
         {
             var input1actual = new int[] { 0, 1, 2, 0, 3, 0, 4 };
             var expect = new int[] { 1, 2, 3, 4, 0, 0, 0 };
+
+            MoveZeroes.MoveZeroesToTheEnd(input1actual);
+
+            input1actual.Should().Equal(expect);
+        }
+
+        [TestMethod()]
+        public void RandomInput_Should_MoveZeroBack()
+        {
+            var input1actual = new int[] { 1, 2, 0, 3, 4, 0, 0, 5, 0 };
+            var expect = new int[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 };
 
             MoveZeroes.MoveZeroesToTheEnd(input1actual);
 
