@@ -1,0 +1,203 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "",
+    "targetDisplayName": ".NET 8.0"
+  },
+  "analysisStartTime": "2024-11-05T00:03:56.3359245Z",
+  "analysisEndTime": "2024-11-05T00:04:06.0781578Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 4,
+      "incidents": 6,
+      "effort": 6
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 5,
+        "Optional": 0,
+        "Potential": 1,
+        "Information": 0
+      },
+      "category": {
+        "Project": 4,
+        "NuGet": 2
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "AlgorithmPlayground\\AlgorithmPlayground.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "ruleInstances": [
+        {
+          "incidentId": "fc0cf421-badd-4190-8eb3-d05229b858e8",
+          "ruleId": "Project.0001",
+          "projectPath": "AlgorithmPlayground\\AlgorithmPlayground.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "AlgorithmPlayground\\AlgorithmPlayground.csproj"
+          }
+        },
+        {
+          "incidentId": "01314024-a6a4-4b86-a862-682248720811",
+          "ruleId": "Project.0002",
+          "projectPath": "AlgorithmPlayground\\AlgorithmPlayground.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0",
+              "protected": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0"
+            },
+            "kind": "File",
+            "path": "AlgorithmPlayground\\AlgorithmPlayground.csproj",
+            "snippet": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0",
+            "protectedSnippet": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0"
+          }
+        }
+      ]
+    },
+    {
+      "path": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 4,
+      "ruleInstances": [
+        {
+          "incidentId": "b41fd01d-c582-4969-ab75-b36963bfa3f9",
+          "ruleId": "NuGet.0002",
+          "projectPath": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Runtime.CompilerServices.Unsafe, 4.5.0\n\nRecommendation:\n\nSystem.Runtime.CompilerServices.Unsafe 6.0.0",
+              "protected": "System.Runtime.CompilerServices.Unsafe, 4.5.0\n\nRecommendation:\n\nSystem.Runtime.CompilerServices.Unsafe 6.0.0"
+            },
+            "kind": "File",
+            "path": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+            "snippet": "System.Runtime.CompilerServices.Unsafe, 4.5.0\n\nRecommendation:\n\nSystem.Runtime.CompilerServices.Unsafe 6.0.0",
+            "protectedSnippet": "System.Runtime.CompilerServices.Unsafe, 4.5.0\n\nRecommendation:\n\nSystem.Runtime.CompilerServices.Unsafe 6.0.0",
+            "label": "System.Runtime.CompilerServices.Unsafe 4.5.0"
+          }
+        },
+        {
+          "incidentId": "d0754bb6-31f9-49b9-9e18-4c76344de597",
+          "ruleId": "NuGet.0003",
+          "projectPath": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Threading.Tasks.Extensions, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+              "protected": "System.Threading.Tasks.Extensions, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+            },
+            "kind": "File",
+            "path": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+            "snippet": "System.Threading.Tasks.Extensions, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "protectedSnippet": "System.Threading.Tasks.Extensions, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "label": "System.Threading.Tasks.Extensions 4.5.0"
+          }
+        },
+        {
+          "incidentId": "71b1b36b-bfe4-4051-8fba-afb73ba39f72",
+          "ruleId": "Project.0001",
+          "projectPath": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj"
+          }
+        },
+        {
+          "incidentId": "3d248a99-3dee-48c7-95f9-04f3631ec693",
+          "ruleId": "Project.0002",
+          "projectPath": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0",
+              "protected": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0"
+            },
+            "kind": "File",
+            "path": "AlgorithmPlaygroundTests\\AlgorithmPlaygroundTests.csproj",
+            "snippet": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0",
+            "protectedSnippet": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0"
+          }
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "Project.0001": {
+      "id": "Project.0001",
+      "description": "Project file needs to be converted to SDK-style. Modern .NET framework projects require a change in the project file format and use SDK corresponding to project flavor and functionality.",
+      "label": "Project file needs to be converted to SDK-style",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in moderrn .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "description": "NuGet package functionality is included with framework reference.\n\nPackage needs to be removed.",
+      "label": "NuGet package functionality is included with framework reference",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

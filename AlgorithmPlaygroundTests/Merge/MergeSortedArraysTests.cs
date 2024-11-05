@@ -30,17 +30,52 @@ namespace AlgorithmPlayground.Merge.Tests
         }
 
         [TestMethod()]
-        [Ignore("not implemented yet - upgrade .net version first")]
         public void TwoSingleElementArrays_Should_TwoRecordsInCorrectOrder()
         {
-            var arr1 = new int[] { 2 };
-            var arr2 = new int[] { 1 };
+            var arr1 = new int[] { 1 };
+            var arr2 = new int[] { 2 };
 
             var actual = MergeSortedArrays.Merge(arr1, arr2);
-            var expect = new int[] { 1, 2 }
-            ;
+            var expect = new int[] { 1, 2 };
 
             actual.Should().Equal(expect);
         }
+
+        [TestMethod()]
+        public void ArrayOneIsLonger_Should_TwoRecordsInCorrectOrder()
+        {
+            var arr1 = new int[] { 1, 2, 3 };
+            var arr2 = new int[] { 2 };
+
+            var actual = MergeSortedArrays.Merge(arr1, arr2);
+            var expect = new int[] { 1, 2, 2, 3 };
+
+            actual.Should().Equal(expect);
+        }
+
+        [TestMethod()]
+        public void ArrayTwoIsLonger_Should_TwoRecordsInCorrectOrder()
+        {
+            var arr1 = new int[] { 1, 2, 3 };
+            var arr2 = new int[] { 1, 2, 4, 6 };
+
+            var actual = MergeSortedArrays.Merge(arr1, arr2);
+            var expect = new int[] { 1, 1, 2, 2, 3, 4, 6 };
+
+            actual.Should().Equal(expect);
+        }
+
+        [TestMethod()]
+        public void GivenResult_Should_ReturnCorrectResult()
+        {
+            var arr1 = new int[] { 0, 3, 4, 31 };
+            var arr2 = new int[] { 4, 6, 30 };
+
+            var actual = MergeSortedArrays.Merge(arr1, arr2);
+            var expect = new int[] { 0, 3, 4, 4, 6, 30, 31 };
+
+            actual.Should().Equal(expect);
+        }
+
     }
 }
