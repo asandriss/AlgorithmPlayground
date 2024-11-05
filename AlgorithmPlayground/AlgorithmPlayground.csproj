@@ -47,7 +47,9 @@
     <Compile Include="Dynamic\Fib.cs" />
     <Compile Include="Dynamic\GridTraveler.cs" />
     <Compile Include="Facebook\AlienDictionary.cs" />
+    <Compile Include="HackerRankChallenges\CaesarCipher.cs" />
     <Compile Include="HackerRankChallenges\TowerBreakers.cs" />
+    <Compile Include="Merge\MergeSortedArrays.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\BinarySearch.cs" />
