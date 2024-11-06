@@ -20,7 +20,7 @@ namespace AlgorithmPlayground.DataStructures
 
         public void Add(TKey key, TValue value)
         {
-            var indexLocation = key.GetHashCode() % _hashSize;
+            var indexLocation = GetIndexForKey(key);
 
             _data[indexLocation] ??= new();
 
@@ -32,12 +32,17 @@ namespace AlgorithmPlayground.DataStructures
 
         public TValue Get(TKey key)
         {
-            var indexLocation = key.GetHashCode() % _hashSize;
+            var indexLocation = GetIndexForKey(key);
 
             var found = SearchLinkedList(_data[indexLocation], key);
             if (found is null) throw new KeyNotFoundException();
 
             return found;
+        }
+
+        private int GetIndexForKey(TKey key)
+        {
+            return Math.Abs(key.GetHashCode()) % _hashSize;
         }
 
         private TValue SearchLinkedList(LinkedList<MyDataRecord> list, TKey keyToFind)
