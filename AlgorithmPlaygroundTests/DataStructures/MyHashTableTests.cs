@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AlgorithmPlayground.DataStructures;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +11,15 @@ namespace AlgorithmPlaygroundTests.DataStructures
     public class MyHashTableTests
     {
         [TestMethod()]
-        public void InitMyHashTable_Should_InitializeDataOfCorrectLength()
+        public void Init_DefaultValue_InitializeDataOfCorrectLength()
+        {
+            MyHashTable<int, string> sut = new();
+
+            sut.Length.Should().Be(0);
+        }
+
+        [TestMethod()]
+        public void Init_CustomValue_InitializeDataOfCorrectLength()
         {
             MyHashTable<int, string> sut = new(5);
 
@@ -18,7 +27,7 @@ namespace AlgorithmPlaygroundTests.DataStructures
         }
 
         [TestMethod()]
-        public void AddingItemsToTheHashTableShouldSetLengthCorrectly_Should_InitializeDataOfCorrectLength()
+        public void Add_SingleValue_SetsCorrectLength()
         {
             MyHashTable<int, string> sut = new(5);
             
@@ -27,42 +36,18 @@ namespace AlgorithmPlaygroundTests.DataStructures
         }
 
         [TestMethod()]
-        public void AddValueToTheHashTable_Should_RetrieveItCorrectly()
+        public void Add_MultipleValues_SetsCorrectLength()
         {
-            MyHashTable<int, string> sut = new(99);
+            MyHashTable<int, string> sut = new();
+            var itemsToAdd = 50;
 
-            sut.Add(1, "test");
-            var actual = sut.Get(1);
-            var expect = "test";
-
-            actual.Should().Be(expect);
+            Enumerable.Range(1, itemsToAdd).RepeatAction(x => sut.Add(x, "Item: " + x));
+            
+            sut.Length.Should().Be(itemsToAdd);
         }
 
         [TestMethod()]
-        public void AddValueViaIndexer_Should_RetrieveItCorrectlyViaIndexer()
-        {
-            MyHashTable<int, string> sut = new(1)
-            {
-                [1] = "test"
-            };
-
-            var actual = sut[1];
-            var expect = "test";
-
-            actual.Should().Be(expect);
-        }
-
-        [TestMethod()]
-        public void RetrievingNonExistingValue_Should_ThrowAnException()
-        {
-            MyHashTable<int, string> sut = new(66);
-
-            var act = () => sut[3];
-            act.Should().Throw<KeyNotFoundException>();
-        }
-
-        [TestMethod()]
-        public void AddingDuplicateKeys_Should_ThrowAnException()
+        public void Add_DuplicateKey_ThrowsAnException()
         {
             MyHashTable<int, string> sut = new(5)
             {
@@ -74,7 +59,19 @@ namespace AlgorithmPlaygroundTests.DataStructures
         }
 
         [TestMethod()]
-        public void AddingDistinctKeysThatHashToTheSameIndex_Should_WorkCorrectly()
+        public void AddGet_SingleValue_RetrievesItCorrectly()
+        {
+            MyHashTable<int, string> sut = new(99);
+
+            sut.Add(1, "test");
+            var actual = sut.Get(1);
+            var expect = "test";
+
+            actual.Should().Be(expect);
+        }
+
+        [TestMethod()]
+        public void Add_ValueWithExistingIndex_ThrowsAnException()
         {
             MyHashTable<int, string> sut = new(5)
             {
@@ -92,7 +89,30 @@ namespace AlgorithmPlaygroundTests.DataStructures
         }
 
         [TestMethod()]
-        public void NegativeAndLargeNumbersForIndexes_Should_WorkCorrectly()
+        public void Indexer_AddSingleValue_RetrieveItCorrectlyViaIndexer()
+        {
+            MyHashTable<int, string> sut = new(1)
+            {
+                [1] = "test"
+            };
+
+            var actual = sut[1];
+            var expect = "test";
+
+            actual.Should().Be(expect);
+        }
+
+        [TestMethod()]
+        public void Get_NonExistingIndex_ThrowsAnException()
+        {
+            MyHashTable<int, string> sut = new(66);
+
+            var act = () => sut[3];
+            act.Should().Throw<KeyNotFoundException>();
+        }
+
+        [TestMethod()]
+        public void AddGet_BoundaryValues_ShouldBeAcceptedAndRetrievedCorrectly()
         {
             MyHashTable<int, string> sut = new(5)
             {
@@ -107,7 +127,7 @@ namespace AlgorithmPlaygroundTests.DataStructures
         }
 
         [TestMethod()]
-        public void StringsAsKeys_Should_WorkCorrectly()
+        public void AddGet_StringKeys_ShouldBeAcceptedAndRetrievedCorrectly()
         {
             MyHashTable<string, string> sut = new(5)
             {
