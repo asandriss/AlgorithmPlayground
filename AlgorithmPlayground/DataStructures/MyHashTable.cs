@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace AlgorithmPlayground.DataStructures
 {
-    public class MyHashTable<TKey, TValue>(int hashSize)
+    public class MyHashTable<TKey, TValue>(int hashSize = 100)
         where TValue : class
     {
         private readonly LinkedList<MyDataRecord>[] _data = new LinkedList<MyDataRecord>[hashSize];
+        private int _length = 0;
 
         public void Add(TKey key, TValue value)
         {
@@ -22,6 +23,7 @@ namespace AlgorithmPlayground.DataStructures
                 throw new ArgumentException("Key already exists in the table");
 
             _data[indexLocation].Add(new MyDataRecord(key, value));
+            _length++;
         }
 
         public TValue Get(TKey key)
@@ -40,7 +42,7 @@ namespace AlgorithmPlayground.DataStructures
             set => Add(key, value);
         }
 
-        public int Length => _data.Length;
+        public int Length => _length;
 
         private int GetIndexForKey(TKey key)
         {

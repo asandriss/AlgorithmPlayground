@@ -14,7 +14,16 @@ namespace AlgorithmPlaygroundTests.DataStructures
         {
             MyHashTable<int, string> sut = new(5);
 
-            sut.Length.Should().Be(5);
+            sut.Length.Should().Be(0);
+        }
+
+        [TestMethod()]
+        public void AddingItemsToTheHashTableShouldSetLengthCorrectly_Should_InitializeDataOfCorrectLength()
+        {
+            MyHashTable<int, string> sut = new(5);
+            
+            sut.Add(1, "test");
+            sut.Length.Should().Be(1);
         }
 
         [TestMethod()]
