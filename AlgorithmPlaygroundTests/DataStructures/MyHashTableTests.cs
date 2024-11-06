@@ -62,5 +62,21 @@ namespace AlgorithmPlayground.DataStructures.Tests
             var act = () => sut[3] = "new value";
             act.Should().Throw<ArgumentException>();
         }
+
+        [TestMethod()]
+        public void AddingDistinctKeysThatHashToTheSameIndex_Should_WorkCorrectly()
+        {
+            MyHashTable sut = new(5);
+            sut[0] = "one";
+            sut[1] = "two";
+            sut[2] = "three";
+            sut[3] = "four";
+            sut[4] = "five";
+            sut[5] = "six";
+            
+
+            var act = () => sut[3] = "new value";
+            act.Should().Throw<ArgumentException>();
+        }
     }
 }

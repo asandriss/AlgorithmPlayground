@@ -9,37 +9,49 @@ namespace AlgorithmPlayground.DataStructures
 {
     public class MyHashTable(int hashSize)
     {
-        private readonly int _hashSize = hashSize;
-        private readonly MyDataRecord[] _data = new MyDataRecord[hashSize];
+        private readonly LinkedList<MyDataRecord>[] _data = new LinkedList<MyDataRecord>[hashSize];
 
         public void Add(int key, string value)
         {
-            _data[key] = new MyDataRecord(key, value);
+            var indexLocation = key % hashSize;
+
+            _data[indexLocation] ??= new LinkedList<MyDataRecord>();
+
+            if (SearchLinkedList(_data[indexLocation], key) is not null)
+                throw new ArgumentException("Key already exists in the table");
+
+            _data[indexLocation].Add(new MyDataRecord(key, value));
         }
 
         public string Get(int key)
         {
-            return _data[key].Value;
+            var indexLocation = key % hashSize;
+
+            var found = SearchLinkedList(_data[indexLocation], key);
+            if (found is null) throw new KeyNotFoundException();
+
+            return found;
+        }
+
+        private string SearchLinkedList(LinkedList<MyDataRecord> list, int keyToFind)
+        {
+            if (list?.Head == null) return null;
+
+            var record = list.Head;
+
+            while (record != null)
+            {
+                if (record.Data.Key == keyToFind) return record.Data.Value;
+                record = record.Next;
+            }
+
+            return null;
         }
 
         public string this[int key]
         {
-            get
-            {
-                if (_data[key] is not null)
-                {
-                    return _data[key].Value;
-                }
-
-                throw new KeyNotFoundException();
-            }
-            set
-            {
-                if (_data[key] is not null)
-                    throw new ArgumentException("Cannot add duplicate keys");
-
-                _data[key] = new MyDataRecord(key, value);
-            }
+            get => Get(key);
+            set => Add(key, value);
         }
 
         public int Length => _data.Length;
