@@ -7,15 +7,22 @@ using System.Threading.Tasks;
 
 namespace AlgorithmPlayground.DataStructures
 {
-    public class MyHashTable(int hashSize)
+    public class MyHashTable<TKey, TValue> where TValue : class
     {
-        private readonly LinkedList<MyDataRecord>[] _data = new LinkedList<MyDataRecord>[hashSize];
+        private readonly LinkedList<MyDataRecord>[] _data;
+        private readonly int _hashSize;
 
-        public void Add(int key, string value)
+        public MyHashTable(int hashSize)
         {
-            var indexLocation = key % hashSize;
+            _hashSize = hashSize;
+            _data = new LinkedList<MyDataRecord>[hashSize];
+        }
 
-            _data[indexLocation] ??= new LinkedList<MyDataRecord>();
+        public void Add(TKey key, TValue value)
+        {
+            var indexLocation = key.GetHashCode() % _hashSize;
+
+            _data[indexLocation] ??= new();
 
             if (SearchLinkedList(_data[indexLocation], key) is not null)
                 throw new ArgumentException("Key already exists in the table");
@@ -23,9 +30,9 @@ namespace AlgorithmPlayground.DataStructures
             _data[indexLocation].Add(new MyDataRecord(key, value));
         }
 
-        public string Get(int key)
+        public TValue Get(TKey key)
         {
-            var indexLocation = key % hashSize;
+            var indexLocation = key.GetHashCode() % _hashSize;
 
             var found = SearchLinkedList(_data[indexLocation], key);
             if (found is null) throw new KeyNotFoundException();
@@ -33,7 +40,7 @@ namespace AlgorithmPlayground.DataStructures
             return found;
         }
 
-        private string SearchLinkedList(LinkedList<MyDataRecord> list, int keyToFind)
+        private TValue SearchLinkedList(LinkedList<MyDataRecord> list, TKey keyToFind)
         {
             if (list?.Head == null) return null;
 
@@ -41,14 +48,14 @@ namespace AlgorithmPlayground.DataStructures
 
             while (record != null)
             {
-                if (record.Data.Key == keyToFind) return record.Data.Value;
+                if (record.Data.Key.Equals(keyToFind)) return record.Data.Value;
                 record = record.Next;
             }
 
             return null;
         }
 
-        public string this[int key]
+        public TValue this[TKey key]
         {
             get => Get(key);
             set => Add(key, value);
@@ -56,11 +63,11 @@ namespace AlgorithmPlayground.DataStructures
 
         public int Length => _data.Length;
 
-        internal class MyDataRecord(int key, string value)
+        private class MyDataRecord(TKey key, TValue value)
         {
-            public int Key { get; } = key;
+            public TKey Key { get; } = key;
 
-            public string Value { get; } = value;
+            public TValue Value { get; } = value;
         }
     }
 
