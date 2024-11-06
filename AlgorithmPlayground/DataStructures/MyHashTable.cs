@@ -7,16 +7,10 @@ using System.Threading.Tasks;
 
 namespace AlgorithmPlayground.DataStructures
 {
-    public class MyHashTable<TKey, TValue> where TValue : class
+    public class MyHashTable<TKey, TValue>(int hashSize)
+        where TValue : class
     {
-        private readonly LinkedList<MyDataRecord>[] _data;
-        private readonly int _hashSize;
-
-        public MyHashTable(int hashSize)
-        {
-            _hashSize = hashSize;
-            _data = new LinkedList<MyDataRecord>[hashSize];
-        }
+        private readonly LinkedList<MyDataRecord>[] _data = new LinkedList<MyDataRecord>[hashSize];
 
         public void Add(TKey key, TValue value)
         {
@@ -40,12 +34,20 @@ namespace AlgorithmPlayground.DataStructures
             return found;
         }
 
-        private int GetIndexForKey(TKey key)
+        public TValue this[TKey key]
         {
-            return Math.Abs(key.GetHashCode()) % _hashSize;
+            get => Get(key);
+            set => Add(key, value);
         }
 
-        private TValue SearchLinkedList(LinkedList<MyDataRecord> list, TKey keyToFind)
+        public int Length => _data.Length;
+
+        private int GetIndexForKey(TKey key)
+        {
+            return Math.Abs(key.GetHashCode() % hashSize);
+        }
+
+        private static TValue SearchLinkedList(LinkedList<MyDataRecord> list, TKey keyToFind)
         {
             if (list?.Head == null) return null;
 
@@ -59,14 +61,6 @@ namespace AlgorithmPlayground.DataStructures
 
             return null;
         }
-
-        public TValue this[TKey key]
-        {
-            get => Get(key);
-            set => Add(key, value);
-        }
-
-        public int Length => _data.Length;
 
         private class MyDataRecord(TKey key, TValue value)
         {
