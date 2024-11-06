@@ -11,3 +11,5 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("40f1186a-5c40-4a6c-b897-0dab8a816657")]
+
+[assembly: InternalsVisibleTo("AlgorithmPlaygroundTests")]
