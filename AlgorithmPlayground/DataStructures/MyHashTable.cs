@@ -22,6 +22,26 @@ namespace AlgorithmPlayground.DataStructures
             return _data[key].Value;
         }
 
+        public string this[int key]
+        {
+            get
+            {
+                if (_data[key] is not null)
+                {
+                    return _data[key].Value;
+                }
+
+                throw new KeyNotFoundException();
+            }
+            set
+            {
+                if (_data[key] is not null)
+                    throw new ArgumentException("Cannot add duplicate keys");
+
+                _data[key] = new MyDataRecord(key, value);
+            }
+        }
+
         public int Length => _data.Length;
 
         internal class MyDataRecord(int key, string value)

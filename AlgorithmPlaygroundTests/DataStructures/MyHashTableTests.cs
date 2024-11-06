@@ -31,5 +31,36 @@ namespace AlgorithmPlayground.DataStructures.Tests
 
             actual.Should().Be(expect);
         }
+
+        [TestMethod()]
+        public void AddValueViaIndexer_Should_RetrieveItCorrectlyViaIndexer()
+        {
+            MyHashTable sut = new(5);
+
+            sut[1] = "test";
+            var actual = sut[1];
+            var expect = "test";
+
+            actual.Should().Be(expect);
+        }
+
+        [TestMethod()]
+        public void RetrievingNonExistingValue_Should_ThrowAnException()
+        {
+            MyHashTable sut = new(5);
+
+            var act = () => sut[3];
+            act.Should().Throw<KeyNotFoundException>();
+        }
+
+        [TestMethod()]
+        public void AddingDuplicateKeys_Should_ThrowAnException()
+        {
+            MyHashTable sut = new(5);
+            sut[3] = "existing value";
+
+            var act = () => sut[3] = "new value";
+            act.Should().Throw<ArgumentException>();
+        }
     }
 }
