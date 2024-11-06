@@ -59,18 +59,6 @@ namespace AlgorithmPlaygroundTests.DataStructures
         }
 
         [TestMethod()]
-        public void AddGet_SingleValue_RetrievesItCorrectly()
-        {
-            MyHashTable<int, string> sut = new(99);
-
-            sut.Add(1, "test");
-            var actual = sut.Get(1);
-            var expect = "test";
-
-            actual.Should().Be(expect);
-        }
-
-        [TestMethod()]
         public void Add_ValueWithExistingIndex_ThrowsAnException()
         {
             MyHashTable<int, string> sut = new(5)
@@ -87,6 +75,20 @@ namespace AlgorithmPlaygroundTests.DataStructures
             var act = () => sut[3] = "new value";
             act.Should().Throw<ArgumentException>();
         }
+
+
+        [TestMethod()]
+        public void AddGet_SingleValue_RetrievesItCorrectly()
+        {
+            MyHashTable<int, string> sut = new(99);
+
+            sut.Add(1, "test");
+            var actual = sut.Get(1);
+            var expect = "test";
+
+            actual.Should().Be(expect);
+        }
+
 
         [TestMethod()]
         public void Indexer_AddSingleValue_RetrieveItCorrectlyViaIndexer()
@@ -144,6 +146,53 @@ namespace AlgorithmPlaygroundTests.DataStructures
             var actual = sut["@##%##$@"];
 
             actual.Should().Be(expect);
+        }
+
+        [TestMethod()]
+        public void Remove_OnlyItem_RemoveTheItemAndShouldLeaveTheCollectionEmpty()
+        {
+            MyHashTable<int, string> sut = new MyHashTable<int, string>(2);
+
+            sut.Add(5, "five");
+            
+            sut.Remove(5);
+            var act = () => sut[5];
+            
+            act.Should().Throw<KeyNotFoundException>();
+            sut.Length.Should().Be(0);
+        }
+
+        [TestMethod()]
+        public void Remove_HashCollision_WorkCorrectly()
+        {
+            MyHashTable<int, string> sut = new MyHashTable<int, string>(1);
+
+            sut.Add(5, "five");
+            sut.Add(10, "ten");
+            sut.Add(100, "one hundred");
+
+            var actual = sut.Remove(10);
+            var act = () => sut[10];
+
+            actual.Should().BeTrue();
+            act.Should().Throw<KeyNotFoundException>();
+            sut.Length.Should().Be(2);
+            sut[5].Should().BeEquivalentTo("five");
+        }
+
+        [TestMethod()]
+        public void Remove_NonExistingItem_ReturnFalse()
+        {
+            MyHashTable<int, string> sut = new MyHashTable<int, string>(1);
+
+            sut.Add(5, "five");
+            sut.Add(10, "ten");
+            sut.Add(100, "one hundred");
+
+            var actual = sut.Remove(47);
+            
+            actual.Should().BeFalse();
+            sut.Length.Should().Be(3);
         }
     }
 }

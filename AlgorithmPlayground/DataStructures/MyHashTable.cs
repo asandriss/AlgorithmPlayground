@@ -36,6 +36,19 @@ namespace AlgorithmPlayground.DataStructures
             return found;
         }
 
+        public bool Remove(TKey key)
+        {
+            var indexLocation = GetIndexForKey(key);
+
+            var successfullyRemoved = FindAndRemoveItem(_data[indexLocation], key);
+            if (successfullyRemoved)
+            {
+                _length--;
+            }
+
+            return successfullyRemoved;
+        }
+        
         public TValue this[TKey key]
         {
             get => Get(key);
@@ -62,6 +75,33 @@ namespace AlgorithmPlayground.DataStructures
             }
 
             return null;
+        }
+
+        private bool FindAndRemoveItem(LinkedList<MyDataRecord> list, TKey keyToRemove)
+        {
+            if (list?.Head == null) return false;
+            var record = list.Head;
+            Node<MyDataRecord> previous = null;
+            
+            while (record != null)
+            {
+                if (record.Data.Key.Equals(keyToRemove))
+                {
+                    if (previous == null)
+                    {
+                        list.Head = record.Next;
+                        return true;
+                    }
+
+                    previous.Next = record.Next;
+                    return true;
+                }
+
+                previous = record;
+                record = record.Next;
+            }
+
+            return false;
         }
 
         private class MyDataRecord(TKey key, TValue value)
