@@ -10,23 +10,19 @@ namespace AlgorithmPlayground.LeetCode
     {
         public static string Merge(string word1, string word2)
         {
-            var arr1 = word1.ToCharArray();
-            var arr2 = word2.ToCharArray();
-            var commonLength = Math.Min(arr1.Length, arr2.Length);
+            var max = Math.Max(word1.Length, word2.Length);
             
             var result = string.Empty;
 
-            for (int i = 0; i < commonLength; i++)
+            for (int i = 0; i < max; i++)
             {
-                result += arr1[i].ToString() + arr2[i].ToString();
+                if(i < word1.Length)
+                    result += word1[i];
+
+                if(i < word2.Length)
+                    result += word2[i];
             }
 
-            if (arr1.Length > commonLength)
-                result += word1.Substring(commonLength);
-
-            if (arr2.Length > commonLength)
-                result += word2.Substring(commonLength);
-            
             return result;
         }
     }
